@@ -19,6 +19,7 @@
 import logging
 import sys
 import time
+from tkinter import NO
 
 from gvm.errors import GvmError
 from gvm.protocols.gmp import Gmp
@@ -125,7 +126,13 @@ def main():
         with protocol_class(connection, transform=transform) as protocol:
             if args.protocol == PROTOCOL_GMP:
                 # Ask for password if none are given
-                authenticate(protocol, args.gmp_username, args.gmp_password)
+                if args.gmp_username4socket is not None:
+                    gmp_username = args.gmp_username4socket
+                    gmp_password = args.gmp_password4socket
+                else:
+                    gmp_username = args.gmp_username
+                    gmp_password = args.gmp_password
+                authenticate(protocol, gmp_username, gmp_password)
 
             if args.duration:
                 starttime = time.time()

@@ -273,6 +273,19 @@ class CliParser:
             nargs="?",
             help="Path to UNIX Domain socket (default: %(default)s)",
         )
+        
+        parser_socket.add_argument(
+            "--gmp_username4socket",
+            type=str,
+            default=None,
+            help="GMP username for socket connection",
+        )
+        parser_socket.add_argument(
+            "--gmp_password4socket",
+            type=str,
+            default=None,
+            help="GMP password for socket connection",
+        )
 
         self._parser_ssh = parser_ssh
         self._parser_socket = parser_socket
